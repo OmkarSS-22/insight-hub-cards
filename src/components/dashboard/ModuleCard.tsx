@@ -9,11 +9,24 @@ interface MetricItem {
   trendValue?: string;
 }
 
+interface ProgressItem {
+  label: string;
+  value: number; // 0-100
+  color?: "primary" | "success" | "warning" | "destructive";
+}
+
+interface ActivityItem {
+  text: string;
+  time: string;
+}
+
 interface ModuleCardProps {
   title: string;
   description: string;
   icon: ReactNode;
   metrics: MetricItem[];
+  progress?: ProgressItem[];
+  activity?: ActivityItem[];
   status?: { label: string; type: "info" | "warning" | "success" | "danger" };
   href: string;
 }
@@ -25,7 +38,14 @@ const statusStyles = {
   danger: "bg-destructive/10 text-destructive",
 };
 
-const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleCardProps) => {
+const progressColors = {
+  primary: "bg-primary",
+  success: "bg-success",
+  warning: "bg-warning",
+  destructive: "bg-destructive",
+};
+
+const ModuleCard = ({ title, description, icon, metrics, progress, activity, status, href }: ModuleCardProps) => {
   const navigate = useNavigate();
 
   return (
@@ -34,6 +54,7 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         transition-all duration-200 hover:shadow-md hover:border-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={() => navigate(href)}
     >
+      {/* Header */}
       <div className="flex items-center gap-3 mb-3">
         <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center shrink-0">
           {icon}
@@ -49,7 +70,8 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         )}
       </div>
 
-      <div className="space-y-1.5 flex-1">
+      {/* Metrics */}
+      <div className="space-y-1.5">
         {metrics.map((metric, i) => (
           <div key={i} className="flex items-center justify-between">
             <span className="text-[11px] text-muted-foreground">{metric.label}</span>
@@ -69,6 +91,46 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         ))}
       </div>
 
+      {/* Progress bars */}
+      {progress && progress.length > 0 && (
+        <div className="mt-3 space-y-2">
+          <div className="border-t border-border/60 pt-2">
+            {progress.map((p, i) => (
+              <div key={i} className="mb-1.5 last:mb-0">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] text-muted-foreground">{p.label}</span>
+                  <span className="text-[10px] font-semibold text-card-foreground tabular-nums">{p.value}%</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all ${progressColors[p.color || "primary"]}`}
+                    style={{ width: `${p.value}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Recent activity */}
+      {activity && activity.length > 0 && (
+        <div className="mt-3 flex-1">
+          <div className="border-t border-border/60 pt-2">
+            <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Recent</span>
+            <div className="mt-1.5 space-y-1.5">
+              {activity.map((item, i) => (
+                <div key={i} className="flex items-start justify-between gap-2">
+                  <span className="text-[11px] text-card-foreground leading-tight">{item.text}</span>
+                  <span className="text-[10px] text-muted-foreground shrink-0">{item.time}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
       <div className="mt-auto pt-2 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         <span className="text-[11px] font-medium">Open</span>
         <ArrowRight className="w-3 h-3" />
