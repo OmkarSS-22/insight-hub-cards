@@ -30,17 +30,17 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
 
   return (
     <button
-      className="group text-left w-full rounded-xl bg-card border border-border/80 px-4 py-3.5
-        transition-all duration-200 hover:shadow-sm hover:border-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group text-left w-full rounded-2xl bg-card border border-border/80 p-5 
+        transition-all duration-200 hover:shadow-md hover:border-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={() => navigate(href)}
     >
-      <div className="flex items-center gap-2.5 mb-3">
-        <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center shrink-0">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center shrink-0">
           {icon}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="text-[13px] font-semibold text-card-foreground truncate leading-tight">{title}</h3>
-          <p className="text-[11px] text-muted-foreground truncate">{description}</p>
+          <h3 className="text-sm font-semibold text-card-foreground truncate">{title}</h3>
+          <p className="text-xs text-muted-foreground truncate">{description}</p>
         </div>
         {status && (
           <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${statusStyles[status.type]}`}>
@@ -49,12 +49,12 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         )}
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2">
         {metrics.map((metric, i) => (
           <div key={i} className="flex items-center justify-between">
-            <span className="text-[11px] text-muted-foreground">{metric.label}</span>
+            <span className="text-xs text-muted-foreground">{metric.label}</span>
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-semibold text-card-foreground tabular-nums">{metric.value}</span>
+              <span className="text-xs font-semibold text-card-foreground tabular-nums">{metric.value}</span>
               {metric.trend && metric.trendValue && (
                 <span
                   className={`text-[10px] font-medium ${
@@ -69,8 +69,8 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         ))}
       </div>
 
-      <div className="mt-2.5 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <span className="text-[11px] font-medium">Open</span>
+      <div className="mt-4 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span className="text-xs font-medium">Open</span>
         <ArrowRight className="w-3 h-3" />
       </div>
     </button>
