@@ -30,11 +30,11 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
 
   return (
     <button
-      className="group text-left w-full rounded-2xl bg-card border border-border/80 p-5 
+      className="group text-left w-full h-full rounded-2xl bg-card border border-border/80 p-4 flex flex-col
         transition-all duration-200 hover:shadow-md hover:border-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={() => navigate(href)}
     >
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-3">
         <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center shrink-0">
           {icon}
         </div>
@@ -49,12 +49,12 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1.5 flex-1">
         {metrics.map((metric, i) => (
           <div key={i} className="flex items-center justify-between">
-            <span className="text-xs text-muted-foreground">{metric.label}</span>
+            <span className="text-[11px] text-muted-foreground">{metric.label}</span>
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-semibold text-card-foreground tabular-nums">{metric.value}</span>
+              <span className="text-[11px] font-semibold text-card-foreground tabular-nums">{metric.value}</span>
               {metric.trend && metric.trendValue && (
                 <span
                   className={`text-[10px] font-medium ${
@@ -69,8 +69,8 @@ const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleC
         ))}
       </div>
 
-      <div className="mt-4 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <span className="text-xs font-medium">Open</span>
+      <div className="mt-auto pt-2 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span className="text-[11px] font-medium">Open</span>
         <ArrowRight className="w-3 h-3" />
       </div>
     </button>
