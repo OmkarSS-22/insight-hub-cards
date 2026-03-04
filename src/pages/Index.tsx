@@ -96,31 +96,27 @@ const modules = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
+      <div className="w-full max-w-[1400px] mx-auto px-6 py-4 flex flex-col flex-1 min-h-0">
         {/* Header */}
-        <div className="mb-10">
-          <h1 className="text-2xl font-semibold text-foreground tracking-tight">Dashboard</h1>
-          <p className="text-sm text-muted-foreground mt-1">Your modules at a glance.</p>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h1 className="text-xl font-semibold text-foreground tracking-tight">Dashboard</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">Your modules at a glance.</p>
+          </div>
+          <div className="flex items-center gap-2">
+            {topStats.map((stat, i) => (
+              <div key={i} className="flex items-center gap-2 rounded-lg bg-card border border-border/80 px-3 py-2">
+                <stat.icon className="w-3.5 h-3.5 text-muted-foreground" />
+                <span className="text-xs font-semibold text-card-foreground tabular-nums">{stat.value}</span>
+                <span className="text-[10px] text-muted-foreground">{stat.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Top stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-          {topStats.map((stat, i) => (
-            <div key={i} className="flex items-center gap-3 rounded-xl bg-card border border-border/80 px-4 py-3.5">
-              <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                <stat.icon className="w-4 h-4 text-accent-foreground" />
-              </div>
-              <div>
-                <p className="text-lg font-semibold text-card-foreground leading-none tabular-nums">{stat.value}</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">{stat.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Module cards — asymmetric grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Module cards — fill remaining space */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 flex-1 min-h-0">
           {modules.map((mod) => (
             <ModuleCard key={mod.title} {...mod} />
           ))}
