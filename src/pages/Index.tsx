@@ -31,6 +31,15 @@ const modules = [
       { label: "Approved", value: 124 },
       { label: "Avg. Time", value: "5.2d", trend: "down" as const, trendValue: "12%" },
     ],
+    progress: [
+      { label: "Document Collection", value: 72, color: "primary" as const },
+      { label: "Background Checks", value: 45, color: "warning" as const },
+    ],
+    activity: [
+      { text: "Acme Corp submitted documents", time: "2m ago" },
+      { text: "GlobalTech approved", time: "18m ago" },
+      { text: "NewVend started onboarding", time: "1h ago" },
+    ],
   },
   {
     title: "Order Management",
@@ -42,6 +51,15 @@ const modules = [
       { label: "Open Orders", value: 47 },
       { label: "Fulfilled Today", value: 23 },
       { label: "Total Value", value: "$1.2M" },
+    ],
+    progress: [
+      { label: "Fulfillment Rate", value: 89, color: "success" as const },
+      { label: "On-Time Delivery", value: 94, color: "primary" as const },
+    ],
+    activity: [
+      { text: "PO-4521 shipped via FedEx", time: "5m ago" },
+      { text: "PO-4519 payment received", time: "32m ago" },
+      { text: "PO-4515 delivered", time: "2h ago" },
     ],
   },
   {
@@ -55,6 +73,15 @@ const modules = [
       { label: "Processed Today", value: 16 },
       { label: "Match Rate", value: "94%", trend: "up" as const, trendValue: "2%" },
     ],
+    progress: [
+      { label: "Auto-Match Success", value: 94, color: "success" as const },
+      { label: "Approval Pipeline", value: 58, color: "warning" as const },
+    ],
+    activity: [
+      { text: "INV-8842 auto-matched to PO", time: "1m ago" },
+      { text: "INV-8839 flagged for review", time: "15m ago" },
+      { text: "Batch #47 processed (12 inv)", time: "1h ago" },
+    ],
   },
   {
     title: "Vendor Due Diligence",
@@ -66,6 +93,15 @@ const modules = [
       { label: "Under Review", value: 9 },
       { label: "Compliant", value: "89%", trend: "up" as const, trendValue: "4%" },
       { label: "High Risk", value: 3, trend: "down" as const, trendValue: "1" },
+    ],
+    progress: [
+      { label: "Compliance Score", value: 89, color: "success" as const },
+      { label: "Risk Assessment", value: 67, color: "destructive" as const },
+    ],
+    activity: [
+      { text: "SupplyMax flagged — sanctions list", time: "8m ago" },
+      { text: "TechParts passed KYC review", time: "45m ago" },
+      { text: "Annual review batch started", time: "3h ago" },
     ],
   },
   {
@@ -79,6 +115,15 @@ const modules = [
       { label: "Expiring (30d)", value: 5 },
       { label: "Renewal Rate", value: "78%" },
     ],
+    progress: [
+      { label: "Renewals Completed", value: 78, color: "primary" as const },
+      { label: "Signature Pending", value: 35, color: "warning" as const },
+    ],
+    activity: [
+      { text: "MSA-210 signed by both parties", time: "12m ago" },
+      { text: "NDA-089 renewal initiated", time: "1h ago" },
+      { text: "SOW-445 sent for legal review", time: "4h ago" },
+    ],
   },
   {
     title: "Sourcing",
@@ -90,6 +135,15 @@ const modules = [
       { label: "Open RFPs", value: 2 },
       { label: "Proposals", value: 14, trend: "up" as const, trendValue: "6" },
       { label: "Avg. Savings", value: "12%", trend: "up" as const, trendValue: "3%" },
+    ],
+    progress: [
+      { label: "RFP-22 Responses", value: 85, color: "primary" as const },
+      { label: "RFP-23 Responses", value: 30, color: "warning" as const },
+    ],
+    activity: [
+      { text: "3 new bids on RFP-22", time: "20m ago" },
+      { text: "RFP-23 published to portal", time: "2h ago" },
+      { text: "Vendor shortlist finalized", time: "5h ago" },
     ],
   },
 ];
