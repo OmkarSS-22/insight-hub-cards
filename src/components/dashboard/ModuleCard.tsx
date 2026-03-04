@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface MetricItem {
   label: string;
@@ -14,55 +13,55 @@ interface ModuleCardProps {
   title: string;
   description: string;
   icon: ReactNode;
-  accentColor: string;
   metrics: MetricItem[];
-  status?: { label: string; variant: "default" | "secondary" | "destructive" | "outline" };
+  status?: { label: string; type: "info" | "warning" | "success" | "danger" };
   href: string;
 }
 
-const ModuleCard = ({ title, description, icon, accentColor, metrics, status, href }: ModuleCardProps) => {
+const statusStyles = {
+  info: "bg-accent text-accent-foreground",
+  warning: "bg-warning/10 text-warning",
+  success: "bg-success/10 text-success",
+  danger: "bg-destructive/10 text-destructive",
+};
+
+const ModuleCard = ({ title, description, icon, metrics, status, href }: ModuleCardProps) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="group relative cursor-pointer rounded-2xl bg-card border border-border/60 p-6 
-        transition-all duration-300 hover:shadow-blue-lg hover:-translate-y-1 hover:border-primary/20 overflow-hidden"
+    <button
+      className="group text-left w-full rounded-2xl bg-card border border-border/80 p-5 
+        transition-all duration-200 hover:shadow-md hover:border-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={() => navigate(href)}
     >
-      {/* Top gradient accent line */}
-      <div className={`absolute top-0 left-0 right-0 h-1 ${accentColor} opacity-60 group-hover:opacity-100 transition-opacity`} />
-
-      <div className="flex items-start justify-between mb-4">
-        <div className="p-2.5 rounded-xl gradient-blue-subtle border border-primary/10">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center shrink-0">
           {icon}
         </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-semibold text-card-foreground truncate">{title}</h3>
+          <p className="text-xs text-muted-foreground truncate">{description}</p>
+        </div>
         {status && (
-          <Badge variant={status.variant} className="text-[11px] font-medium">
+          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${statusStyles[status.type]}`}>
             {status.label}
-          </Badge>
+          </span>
         )}
       </div>
 
-      <h3 className="text-base font-semibold text-card-foreground mb-0.5">{title}</h3>
-      <p className="text-xs text-muted-foreground mb-5">{description}</p>
-
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         {metrics.map((metric, i) => (
           <div key={i} className="flex items-center justify-between">
             <span className="text-xs text-muted-foreground">{metric.label}</span>
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-semibold text-card-foreground">{metric.value}</span>
+              <span className="text-xs font-semibold text-card-foreground tabular-nums">{metric.value}</span>
               {metric.trend && metric.trendValue && (
                 <span
-                  className={`text-[11px] font-medium ${
-                    metric.trend === "up"
-                      ? "text-success"
-                      : metric.trend === "down"
-                      ? "text-destructive"
-                      : "text-muted-foreground"
+                  className={`text-[10px] font-medium ${
+                    metric.trend === "up" ? "text-success" : metric.trend === "down" ? "text-destructive" : "text-muted-foreground"
                   }`}
                 >
-                  {metric.trend === "up" ? "↑" : metric.trend === "down" ? "↓" : "→"} {metric.trendValue}
+                  {metric.trend === "up" ? "↑" : metric.trend === "down" ? "↓" : "·"}{metric.trendValue}
                 </span>
               )}
             </div>
@@ -70,14 +69,11 @@ const ModuleCard = ({ title, description, icon, accentColor, metrics, status, hr
         ))}
       </div>
 
-      <div className="mt-5 pt-3.5 border-t border-border/50 flex items-center justify-between">
-        <span className="text-xs font-semibold text-primary group-hover:underline">View Details</span>
-        <div className="w-7 h-7 rounded-lg bg-primary/5 group-hover:bg-primary group-hover:text-primary-foreground 
-          flex items-center justify-center transition-all duration-300">
-          <ArrowUpRight className="w-3.5 h-3.5 text-primary group-hover:text-primary-foreground transition-colors" />
-        </div>
+      <div className="mt-4 flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span className="text-xs font-medium">Open</span>
+        <ArrowRight className="w-3 h-3" />
       </div>
-    </div>
+    </button>
   );
 };
 
