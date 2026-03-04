@@ -7,7 +7,6 @@ import {
   Search,
 } from "lucide-react";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import SummaryBar from "@/components/dashboard/SummaryBar";
 import ModuleCard from "@/components/dashboard/ModuleCard";
 
 const modules = [
@@ -15,7 +14,7 @@ const modules = [
     title: "Vendor Onboarding",
     description: "Track and manage new vendor registrations",
     icon: <Users className="w-5 h-5 text-primary" />,
-    iconBg: "bg-primary/10",
+    accentColor: "gradient-blue",
     href: "/vendor-onboarding",
     status: { label: "12 Pending", variant: "secondary" as const },
     metrics: [
@@ -27,8 +26,8 @@ const modules = [
   {
     title: "Order Management",
     description: "Monitor purchase orders and fulfillment",
-    icon: <ShoppingCart className="w-5 h-5 text-info" />,
-    iconBg: "bg-info/10",
+    icon: <ShoppingCart className="w-5 h-5 text-primary" />,
+    accentColor: "gradient-blue",
     href: "/order-management",
     status: { label: "On Track", variant: "default" as const },
     metrics: [
@@ -40,8 +39,8 @@ const modules = [
   {
     title: "Invoice Processing",
     description: "Automate and track invoice workflows",
-    icon: <FileText className="w-5 h-5 text-success" />,
-    iconBg: "bg-success/10",
+    icon: <FileText className="w-5 h-5 text-primary" />,
+    accentColor: "gradient-blue",
     href: "/invoice-processing",
     status: { label: "8 Overdue", variant: "destructive" as const },
     metrics: [
@@ -53,8 +52,8 @@ const modules = [
   {
     title: "Vendor Due Diligence",
     description: "Risk assessment and compliance checks",
-    icon: <ShieldCheck className="w-5 h-5 text-warning" />,
-    iconBg: "bg-warning/10",
+    icon: <ShieldCheck className="w-5 h-5 text-primary" />,
+    accentColor: "gradient-blue",
     href: "/vendor-due-diligence",
     status: { label: "3 Flagged", variant: "destructive" as const },
     metrics: [
@@ -66,8 +65,8 @@ const modules = [
   {
     title: "Contract Lifecycle",
     description: "Manage contracts from creation to renewal",
-    icon: <FileSignature className="w-5 h-5 text-destructive" />,
-    iconBg: "bg-destructive/10",
+    icon: <FileSignature className="w-5 h-5 text-primary" />,
+    accentColor: "gradient-blue",
     href: "/contract-lifecycle",
     status: { label: "5 Expiring", variant: "secondary" as const },
     metrics: [
@@ -79,8 +78,8 @@ const modules = [
   {
     title: "Sourcing",
     description: "Strategic sourcing and supplier discovery",
-    icon: <Search className="w-5 h-5 text-accent-foreground" />,
-    iconBg: "bg-accent",
+    icon: <Search className="w-5 h-5 text-primary" />,
+    accentColor: "gradient-blue",
     href: "/sourcing",
     status: { label: "2 Active RFPs", variant: "default" as const },
     metrics: [
@@ -96,8 +95,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <DashboardHeader />
-        <SummaryBar />
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-8">
           {modules.map((mod) => (
             <ModuleCard key={mod.title} {...mod} />
           ))}
